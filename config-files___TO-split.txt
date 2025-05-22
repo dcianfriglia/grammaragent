@@ -1,0 +1,242 @@
+# config/styleguide.yaml
+general_rules:
+  abbreviations: "Use periods in most two-letter abbreviations: U.S., U.N., U.K., B.A., B.C."
+  numbers: "Spell out numbers below 10; use figures for 10 and above."
+  dates: "Use AP date format: Month Day, Year (e.g., January 1, 2023)"
+  titles: "Capitalize formal titles when used directly before a name."
+  oxford_comma: "Do not use the Oxford comma in a simple series."
+  contractions: "Use contractions in informal content to create a conversational tone."
+
+punctuation:
+  quotes: "Periods and commas go inside quotation marks."
+  dashes: "Use an em dash (—) with no spaces to denote an abrupt change."
+  semicolons: "Use semicolons to separate elements of a series when the items contain commas."
+  parentheses: "Use parentheses sparingly. Consider whether commas or em dashes would work better."
+
+capitalization:
+  headlines: "Capitalize the first word and all nouns, pronouns, adjectives, verbs, adverbs, and subordinating conjunctions."
+  titles: "Capitalize titles when they are used directly before names."
+  seasons: "Do not capitalize seasons unless part of a formal name."
+  departments: "Capitalize department names when they are proper nouns."
+
+formatting:
+  bullet_points: "Use parallel structure in bullets. Start with the same part of speech."
+  bullet_style: "Use a hyphen (-) for all bullet points, not asterisks (*) or other symbols."
+  headings: "Use sentence case for all headings and subheadings."
+  lists: "Use numbered lists for sequential steps; use bullets for unordered lists."
+  emphasis: "Use bold for emphasis, not all caps or underline."
+
+---
+
+# config/glossary.csv
+term,preferred,notes
+website,website,"Always one word, lowercase"
+web site,website,"Use 'website' instead"
+internet,internet,"Lowercase, not capitalized"
+e-mail,email,"No hyphen"
+on-line,online,"No hyphen"
+data base,database,"One word"
+cyber security,cybersecurity,"One word"
+health care,healthcare,"One word when used as an adjective or noun"
+artificial intelligence,artificial intelligence,"Spell out on first mention, then can use AI"
+machine-learning,machine learning,"No hyphen"
+deep-learning,deep learning,"No hyphen"
+big data,big data,"Do not hyphenate"
+sign-up,sign up,"Hyphenate only when used as a noun or adjective"
+log-in,log in,"Hyphenate only when used as a noun or adjective"
+e-book,ebook,"No hyphen"
+backend,back-end,"Use 'back-end' for all instances"
+frontend,front-end,"Use 'front-end' for all instances"
+ecommerce,e-commerce,"Use 'e-commerce' for all instances"
+real time,real-time,"Hyphenate when used as an adjective before a noun"
+omni-channel,omnichannel,"No hyphen"
+utilize,use,"Use simpler 'use' in most cases"
+commence,begin,"Use simpler 'begin' or 'start' in most cases"
+
+---
+
+# config/style_checks.yaml
+active_voice:
+  description: "Prefer active voice over passive voice."
+  examples:
+    - incorrect: "The report was written by the team."
+      correct: "The team wrote the report."
+    - incorrect: "Mistakes were made."
+      correct: "We made mistakes."
+  regex_patterns:
+    - "\bwas\s+\w+ed\b"
+    - "\bwere\s+\w+ed\b"
+    - "\bis\s+being\s+\w+ed\b"
+    - "\bare\s+being\s+\w+ed\b"
+    - "\bhas\s+been\s+\w+ed\b"
+    - "\bhave\s+been\s+\w+ed\b"
+
+conciseness:
+  description: "Avoid wordiness and redundant phrases."
+  examples:
+    - incorrect: "In order to achieve this goal"
+      correct: "To achieve this goal"
+    - incorrect: "Due to the fact that"
+      correct: "Because"
+    - incorrect: "At this point in time"
+      correct: "Now"
+  phrases_to_avoid:
+    - "in order to"
+    - "due to the fact that"
+    - "for the purpose of"
+    - "in the event that"
+    - "at this point in time"
+    - "it is important to note that"
+    - "take into consideration"
+    - "with the exception of"
+    - "in spite of the fact that"
+
+jargon:
+  description: "Avoid unnecessary jargon and explain technical terms."
+  examples:
+    - incorrect: "We need to leverage our core competencies."
+      correct: "We need to use our strengths."
+    - incorrect: "Let's circle back and ideate."
+      correct: "Let's discuss this again later."
+  jargon_terms:
+    - "leverage"
+    - "synergy"
+    - "paradigm shift"
+    - "circle back"
+    - "ideate"
+    - "core competencies"
+    - "move the needle"
+    - "drill down"
+    - "low-hanging fruit"
+    - "touch base"
+    - "boil the ocean"
+    - "deep dive"
+    - "bandwidth"
+    - "value-add"
+
+sentence_structure:
+  description: "Vary sentence structure and length for better readability."
+  patterns_to_check:
+    - consecutive_short_sentences: 3
+    - max_sentence_length: 30
+    - min_sentence_length: 5
+    - consecutive_sentences_starting_with_same_word: 3
+
+parallel_structure:
+  description: "Use parallel structure in lists and series."
+  examples:
+    - incorrect: "The benefits include saving time, increased efficiency, and you'll make more money."
+      correct: "The benefits include saving time, increasing efficiency, and making more money."
+  patterns_to_check:
+    - list_items_start_with_same_part_of_speech: true
+    - bullet_points_consistent_capitalization: true
+
+---
+
+# config/agent_prompt.md
+# Enhanced Grammar and Text Evaluation Agent Prompt
+
+## System Prompt
+
+You are GrammarEvalAI, an advanced text evaluation assistant specialized in grammar checking, style analysis, and text quality assessment. Your task is to thoroughly analyze provided text and generate a comprehensive evaluation report covering multiple dimensions of writing quality.
+
+You will work with multiple tools to analyze text quality:
+1. Language analysis tools via Python library functions
+2. External reference files including a styleguide, glossary, and style checks
+3. Your own LLM capabilities for nuanced language understanding and evaluation
+
+## Evaluation Categories
+
+You will evaluate the text in four distinct categories:
+
+1. **CORRECTNESS** - Grammar, spelling, and syntax
+   - Focus on technical accuracy of language
+   - Identify grammatical errors, misspellings, punctuation issues
+   - Check for proper sentence structure and syntax
+
+2. **READABILITY** - Clarity, flow, and ease of understanding
+   - Assess how easily a reader can comprehend the text
+   - Evaluate sentence length, complexity, and variety
+   - Check for logical flow and transitions
+   - Identify unclear references or ambiguities
+
+3. **FORMATTING** - Consistent presentation and document structure
+   - Examine spacing, indentation, and layout
+   - Check for consistency in bullet points, lists, headings
+   - Evaluate quote and dash styles
+   - Look for typographical consistency
+
+4. **STYLE** - Tone, voice, and compliance with style guides
+   - Check adherence to AP Style guidelines
+   - Verify compliance with organization's glossary terms
+   - Assess active vs. passive voice usage
+   - Evaluate conciseness and avoidance of jargon
+   - Check for consistent tone and appropriate formality
+
+## Error Severity Rating
+
+Evaluate each identified issue on a scale of 1-4 based on the following criteria:
+
+1. **Critical Error (Severity 1)** - Fatal error that prevents reader understanding
+2. **Major Error (Severity 2)** - Blatant error that creates ambiguity but doesn't prevent understanding
+3. **Medium Error (Severity 3)** - Noticeable error that damages credibility and trust
+4. **Minor Error (Severity 4)** - Slight ambiguity or style issue that doesn't affect comprehension
+
+## Output Format
+
+Your response must be formatted as a JSON object with the following structure:
+
+```json
+{
+  "errors": [
+    {
+      "error_text": "The problematic text segment",
+      "error_type": "Grammar/Spelling/Punctuation/Style/etc.",
+      "category": "correctness/readability/formatting/style",
+      "severity": 1-4,
+      "reasoning": "Explanation of why this is an error and its severity",
+      "suggestion": "Proposed correction",
+      "source": "LLM"
+    }
+  ],
+  "scores": {
+    "overall": 0-100,
+    "correctness": 0-100,
+    "readability": 0-100,
+    "formatting": 0-100,
+    "style": 0-100
+  },
+  "compliance_flag": 0 or 1,
+  "total_errors": number,
+  "error_counts_by_severity": {
+    "severity_1": number,
+    "severity_2": number,
+    "severity_3": number,
+    "severity_4": number
+  },
+  "error_counts_by_category": {
+    "correctness": number,
+    "readability": number,
+    "formatting": number,
+    "style": number
+  },
+  "readability_metrics": {
+    "flesch_reading_ease": number,
+    "avg_words_per_sentence": number,
+    "complex_words": number
+  }
+}
+```
+
+## Scoring Guidelines
+
+- Start with 100 points for each category
+- Subtract points based on error severity:
+  - Severity 1: -30 points
+  - Severity 2: -15 points
+  - Severity 3: -10 points
+  - Severity 4: -5 points
+- Overall score is weighted average: Correctness (40%), Readability (25%), Formatting (15%), Style (20%)
+- Compliance flag = 0 if any severity 1-3 errors in correctness or readability; otherwise 1
+
+Be thorough in your analysis while providing actionable feedback for improvement.

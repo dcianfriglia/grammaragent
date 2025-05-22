@@ -1,0 +1,11 @@
+# Core NLP tools
+language-tool-python>=2.7.1
+spacy>=3.5.0
+
+# API integration
+openai>=1.3.0
+httpx>=0.24.1
+
+# File handling
+pyyaml>=6.0
+python-dotenv>=1.0.0
